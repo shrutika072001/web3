@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Retrieve file from IPFS using Pinata</title>
+  <script>
+    const pinataApiKey = '9092ede1a0075637e8b6'
+    const pinataSecretApiKey = 'a79427720ccef2c7dcfc990d90f0b43d4c5d68c40811e4d19671d760a5a41e50'
+
+    // Define the CID hash of the file you want to retrieve
+    const cid = 'QmZ7DDrDFrktVsvxU7uurgwZFttLTiAksijnsXUncnyED7'
+
+    // Retrieve the file from IPFS using the Pinata API
+    fetch(`https://ipfs.io/${cid}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'pinata_api_key': pinataApiKey,
+        'pinata_secret_api_key': pinataSecretApiKey
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to retrieve file from IPFS')
+      }
+      return response.text()
+    })
+    .then(fileData => {
+      // Do something with the file data, such as display it on the page
+      console.log('Retrieved file data:', fileData)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  </script>
+</head>
+<body>
+  <h1>Retrieve file from IPFS using Pinata</h1>
+  <p>Check the console to see the retrieved file data.</p>
+</body>
+</html>
